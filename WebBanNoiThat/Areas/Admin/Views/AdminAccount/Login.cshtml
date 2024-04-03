@@ -1,0 +1,76 @@
+﻿ @model WebBanNoiThat.Models.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLogin.cshtml";
+
+}
+<style>
+    .container-scroller{
+        display: flex;
+        justify-content: center;
+         align-items:center;
+    }
+
+    .auth-form-light{
+        background-color: rgb(175,238,238);
+        border: 1px solid #CCCC99;
+        margin: 0;
+        width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .input-group{
+       
+        border: 1px solid rgb(135,206,250);
+        border-radius: 10px
+    }
+</style>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-4 mx-auto">
+                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div class="brand-logo">
+                           ADMIN
+                        </div>
+                        <h4>Hello! let's get started</h4>
+                        <h6 class="font-weight-light">Sign in to continue.</h6>
+                        @using (Html.BeginForm("LoginA", "AdminAccount", FormMethod.Post))
+                         {
+
+                            <div class="input-group mb-3">
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "Tài khoản" })
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
+
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                                </div>
+                      
+                            </div>
+                          
+                       }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

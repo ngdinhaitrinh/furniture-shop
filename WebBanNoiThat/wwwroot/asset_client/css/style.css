@@ -1,0 +1,83 @@
+    /* ####################################################
+    :: Template Name: Essence - Fashion Ecommerce Template
+    :: Author: Colorlib
+    :: Author URL: https://colorlib.com
+    :: Description: Essence is smart & elegant fashion e-commerce Template. It's suitable for all e-commerce business platform.
+    :: Version: 1.0.0
+    :: Created: April 27, 2018
+    :: Last Updated: May 2, 2018
+    #################################################### */
+
+    /* ---------------------------------------
+    ##### - PLACE YOUR CUSTOM CSS HERE - #####
+    --------------------------------------- */
+.section-title-normal span, h2, h4, h6, catagories-menu, li {
+    font-family: "Montserrat", sans-serif;
+}
+
+.hero__categories__all {
+    background: rgb(73, 34, 17);
+    position: relative;
+    padding: 10px 25px 10px 40px;
+    cursor: pointer;
+}
+.hero__categories ul {
+
+    position: absolute;
+    left: 0;
+    top: 46px;
+    width: 100%;
+    z-index: 9;
+    background: #ffffff;
+}
+    .hero__categories__all i {
+        font-size: 16px;
+        color: #ffffff;
+        margin-right: 10px;
+    }
+.hero__categories__all span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+.hero__categories ul {
+    border: 1px solid #ebebeb;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+}
+
+    .hero__categories ul li {
+        list-style: none;
+    }
+        .hero__categories ul li a {
+            font-size: 16px;
+            color: #1c1c1c;
+            line-height: 39px;
+            display: block;
+        }
+.banner-area {
+    background: url('@Url.Content("~/asset_client/img/banner/bannerHome.jpg")');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section-title-normal {
+    font-size: 18px;
+    border-bottom: 1px solid #ececec;
+    justify-content: left;
+}
+
+    .section-title-normal span {
+        font-family: "Montserrat", sans-serif;
+    }
+.product-price {
+    line-height: 0.8;
+    color: #fbb710;
+    font-size: 20px;
+   margin: 10px 0;
+}
+.decrease_button .increase_button{
+    width:50px;
+}

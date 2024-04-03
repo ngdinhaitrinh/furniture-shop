@@ -1,0 +1,99 @@
+﻿@using WebBanNoiThat.Models.ViewModels
+@model List<CartItemViewModel>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>GIỎ HÀNG</h2>
+<div class="table-reponsive cart_info">
+    @if (Model.Any())
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr class="cart_menu">
+        
+                <td class="name">Tên sản phẩm</td>
+                <td class="price">Gía</td>
+                <td class="quantity">Số lượng</td>
+                <td class="total">Tổng tiền</td>
+                <td class="total">Thao tác</td>
+            </tr>
+        </thead>
+        <tbody>
+           
+                @foreach (var item in Model)
+                {
+                    <tr>
+                       
+                        <td>
+                            <a href="">@item.TenSp</a>
+                        </td>
+                        <td>
+                            <p>@item.GiaSp</p>
+                        </td>
+                        <td class="card_quantity">
+                            <div class="cart_quantity_button">
+                                <a class="btn btn-default btn-sm" asp-controller="ShoppingCart" asp-action="Decrease" asp-route-id="@item.MaSp">-</a>
+                                <input class="cart_quantity_input" type="text" name="quantity" value="@item.SoLuong" autocomplete="off" size="2">
+                                <a class="btn btn-default btn-sm" asp-controller="ShoppingCart" asp-action="Increase" asp-route-id="@item.MaSp">+</a>
+                            </div>
+
+                        </td>
+                        <td>
+                            @{
+                                var total = item.SoLuong * item.GiaSp;
+                            }
+                            <p class="cart_total_price">@total.ToString()</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="btn btn-danger btn-xl" asp-controller="ShoppingCart" asp-action="Remove" asp-route-id="@item.MaSp"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                }
+                <tr rowspan="5">
+                    <td colspan="6">
+                        @{
+                            decimal totalAmount = Model.Sum(item => item.SoLuong * item.GiaSp);
+                        }
+
+                        Tổng thanh toán <p class="product-price">  @totalAmount.ToString()</p>
+
+
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <a class="btn btn-primary " href="thanh-toan">ĐẶT HÀNG</a>
+                        }
+
+                    </td>
+                </tr>
+                @*<tr rowspan="5">
+
+                  
+                    @{
+                        decimal totalAmount = Model.Sum(item => item.SoLuong * item.GiaSp);
+                    }
+                    <td>Tổng thanh toán <p class="product-price">  @totalAmount.ToString()</p>
+             
+
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <td><a class="btn btn-primary " href="thanh-toan">Thanh toán</a> </td>
+                    }
+                    </td>
+                </tr>*@
+
+        </tbody>
+       
+    </table>
+        
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5"><h4>Giỏ hàng trống</h4></td>
+                </tr>
+
+            }
+</div>

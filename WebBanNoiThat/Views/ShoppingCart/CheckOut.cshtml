@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="">Thanh toán</h1>
+                    <p>Bạn hãy kiểm tra lại thông tin đơn hàng cho chính xác!</p>
+                </div>
+
+            </div>
+            <hr />
+            @if (ViewBag.CheckCart != null)
+            {
+                <div class="row">
+                    <div id="show_success"></div>
+
+                    <div class="col-md-9">
+                        <partial name="Partial_CheckOut" />
+                    </div>
+
+                
+                </div>
+            }
+            else
+            {
+                <div>
+                    Bạn chưa có sản phẩm nào. Vui lòng quay lại trang <a href="/san-pham">sản phẩm</a> để mua hàng.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@*@section scripts{
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myForm').submit(function (e) {
+            e.preventDefault(); // Prevent the form from submitting traditionally
+
+            $.ajax({
+                url: "/ShoppingCart/CheckOut",
+                method: "POST",
+
+                data: JSON.stringify({
+                    CustomerName: $('#CustomerName').val(),
+                    Phone: $('#Phone').val(),
+                    Address: $('#Address').val(),
+                    Email: $('#Email').val(),
+                    TypePayment: $('#TypePayment').val()
+                }),
+                success: function (response) {
+                    // Handle success
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error("AJAX Error:", error);
+                }
+            });
+        });
+    });
+</script>
+}*@

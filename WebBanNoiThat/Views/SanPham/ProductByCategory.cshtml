@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebBanNoiThat.Models.SanPham>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutCategory.cshtml";
+    WebBanNoiThat.Models.BanNoiThatContext db = new WebBanNoiThat.Models.BanNoiThatContext();
+
+}
+<!-- Product 1 -->
+<div class="row">
+    @if (Model != null)
+    {
+
+        @foreach (var item in Model)
+        {
+
+            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                <div class="single-product-wrapper">
+                    <a asp-action="Details" asp-controller="SanPham" asp-route-id="@item.MaSp">
+                        <div class="product-img">
+                            <img src="@item.AnhSp" alt="">
+
+                            <img class="hover-img" src="@item.AnhSp" alt="">
+                        </div>
+
+                        <!-- Product Description -->
+                        <div class="product-description d-flex align-items-center justify-content-between">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price">@item.GiaSp.ToString("#,00") VNĐ</p>
+                                <a asp-action="Details" asp-route-id="@item.MaSp">
+                                    <h6>@item.TenSp</h6>
+                                </a>
+                            </div>
+                            <!-- Ratings & Cart -->
+                            <div class="ratings-cart text-right">
+                                <div class="ratings">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="cart">
+                                    <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-Id="@item.MaSp" data-toggle=" tooltip" data-placement="left" title="Add to Cart"><img src="~/asset_client/img/core-img/cart.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        }
+    }
+    else
+    {
+        <h1>Không có sản phẩm nào</h1>
+        <p>Không tìm thấy sản phẩm trong danh mục này.</p>
+    }
+</div>

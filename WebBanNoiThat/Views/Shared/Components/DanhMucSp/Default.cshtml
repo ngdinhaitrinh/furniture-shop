@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DanhMucSp>
+
+
+<div class="col-lg-3 col-md-5">
+
+    <div class="hero__categories">
+        <div class="hero__categories__all">
+            <i class="fa fa-bars"></i>
+            <a asp-controller="SanPham" asp-action="Index"><span>All departments</span></a>
+
+            <div class="catagories-menu">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+
+                        <li><a href="@Url.Action("ProductByCategory", "SanPham", new { id = @item.MaDm })">@item.TenDm</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+</script>

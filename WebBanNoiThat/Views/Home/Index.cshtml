@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.EntityFrameworkCore
+@model IEnumerable<WebBanNoiThat.Models.SanPham>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var spBanChay = Model.Where(x => x.BestSeller == true);
+}
+<link rel="stylesheet" href="~/asset_client/css/style.css">
+<link rel="stylesheet" href="~/asset_client/scss/style.scss">
+<style>
+    .banner-area {
+        background: url('@Url.Content("~/asset_client/img/banner/bannerHome.jpg")');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .section-title-normal {
+        font-size: 18px;
+        border-bottom: 1px solid #ececec;
+        justify-content: left;
+    }
+
+        .section-title-normal span {
+            font-family: "Montserrat", sans-serif;
+        }
+        strong{
+            font-weight:600;
+            font-size: 60px;
+            color: gainsboro;
+        font-family: "Montserrat", sans-serif;
+        }
+</style>
+<!-- Hero Section Begin -->
+<section class="banner-area section-padding-100">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="hero__item set-bg">
+                    <div class="hero__text">
+                        <h2>LUVHOS</h2>
+                        <h2><strong>nhà xinh</strong></h2>
+                        <p>Free Pickup and Delivery Available</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Product Catagories Area Start -->
+<div class="container" style="margin-top:50px;">
+    <h3 class="section-title section-title-normal" style="margin: 50px 0;">
+        <b></b>
+        <span class="section-title-main">SẢN PHẨM BÁN CHẠY</span>
+        <b></b>
+    </h3>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-4 col-sm-4 col-md-4 col-xl-3">
+                <div class="single-product-wrapper clearfix">
+
+                    <a asp-action="Details" asp-controller="SanPham" asp-route-id="@item.MaSp">
+                        <img src="@item.AnhSp" alt="">
+                        <!-- Product Meta Data -->
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p class="product-price">@item.GiaSp.ToString("#,00") VNĐ</p>
+                            <h6>@item.TenSp</h6>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        }
+    </div>
+</div>

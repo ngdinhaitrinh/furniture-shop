@@ -1,0 +1,162 @@
+﻿@model IEnumerable<WebBanNoiThat.Models.DonHang>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .box input#search {
+        width: 300px;
+        height: 40px;
+        background-color: #ebecf0;
+        font-size: 10pt;
+        float: left;
+        color: #63717f;
+        padding-left: 45px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .box-search{
+       margin-top: 20px;;
+
+    }
+   
+        .btnSearch
+
+    {
+        background-color: #e1ecf4;
+        border-radius: 3px;
+        border: 1px solid #7aa7c7;
+        box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+        box-sizing: border-box;
+        color: #39739d;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.15385;
+        margin: 0;
+        outline: none;
+        padding: 8px .8em;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: baseline;
+        white-space: nowrap;
+    }
+
+   .btnSearch:hover,
+        .btnSearch:focus {
+        background-color: #b3d3ea;
+        color: #2c5777;
+    }
+
+        .btnSearch:focus {
+        box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+    }
+
+    .btnSearch:active {
+        background-color: #a0c7e4;
+        box-shadow: none;
+        color: #2c5777;
+    }
+    
+   
+</style>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Danh Sách Đơn Hàng</h6>
+         
+                </div>
+                <div class="box-search">
+                    @using (Html.BeginForm("Index", "Order", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        <div class="box">
+
+                            <input type="Text" id="search" class="form-control mx-sm-3" value="@ViewBag.Keyword" name="searchString" placeholder="Seaarch...">
+                            <input type="submit" class="btnSearch" value="Tìm">
+
+                        </div>
+                    }
+                  </div>
+            </div>
+          
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã đơn hàng</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên khách hàng</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">SDT</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tổng hóa đơn</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày đặt</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                   
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">@item.MaDh</p>
+
+                                    </td>
+                                     <td>
+                                        <p class="text-xs font-weight-bold mb-0">@item.CustomerName</p>
+
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">@item.Phone</p>
+
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">@item.Address</p>
+
+                                    </td>
+
+                                    <td class="align-middle text-center">
+                                        <span class="text-xs font-weight-bold mb-0"> @item.TotalAmount.ToString("#,##0") VNĐ</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="text-secondary text-xs font-weight-bold">Đơn hàng mới</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-secondary text-xs font-weight-bold">Đơn hàng thành công</span>
+                                        }
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-xs font-weight-bold mb-0"> @item.NgayTao</span>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <a asp-action="Details" asp-route-id="@item.MaDh" class="btn btn-primary">Xem</a>
+                                       
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

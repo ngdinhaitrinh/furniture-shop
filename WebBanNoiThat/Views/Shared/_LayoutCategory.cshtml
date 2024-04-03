@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title>Cửa Hàng Bán Đồ Nội Thất</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="~/asset_client/img/core-img/favicon.ico">
+    <link rel="icon" href="~/asset_client/img/banner/bannerHome.png">
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="~/asset_client/css/core-style.css">
+    <link rel="stylesheet" href="~/asset_client/css/style1.css">
+    <link rel="stylesheet" href="~/asset_client/css/style.css">
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .breadcrumb_bg {
+            background: url('@Url.Content("~/asset_client/img/banner/bannerHome.jpg")');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+        }
+
+        .box input#search {
+            width: 300px;
+            height: 50px;
+            background-color: #ebecf0;
+            font-size: 10pt;
+            float: left;
+            color: #63717f;
+            padding-left: 45px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+
+        .footer-logo a {
+            color: white;
+            font-size: 40px
+        }
+
+       
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="hero_area">
+
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">LUVHOS</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""> </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="SanPham">Cửa hàng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="blog_list.html">Góc cảm hứng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Liên hệ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="ShoppingCart" asp-action="Index">
+                                    <img class="cart-img-icon" alt="Cart" src="~/asset_client/img/ic-shopping.png">
+                                </a>
+                            </li>
+                            <li class="dropdown show">
+                                @if (User.Identity?.IsAuthenticated ?? false)
+                                {
+                                    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @User.Identity.Name
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword"><i class="fa fa-sign-in" aria-hidden="true"></i>Đổi mật khẩu</a></li>
+                                        <li>
+                                            <a class="dropdown-item">
+                                                <form class="form-inline" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                                    <button type="submit" class="nav-link btn btn-link ">Đăng xuất</button>
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                }
+                                else
+                                {
+                                <li class="nav-item">
+
+                                    <a class="nav-link" asp-controller="Account" asp-action="Login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a>
+                                </li>
+                                }
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+
+        <section class="breadcrumb breadcrumb_bg section-padding-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="breadcrumb_iner">
+                            <div class="breadcrumb_iner_item">
+                                <h2>Sản phẩm</h2>
+                                <p>Trang chủ <span>-</span>Sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="product spad">
+            <div class="container">
+                <div class="amado_product_area section-padding-100">
+                    <div class="row">
+                        @await Component.InvokeAsync("DanhMucSp")
+
+                        <div class="col-lg-9 col-md-7">
+
+                            @using (Html.BeginForm("Index", "SanPham", FormMethod.Get, new { @class = "form-inline" }))
+                            {
+                                <div class="box">
+                        
+                                    <input type="Text" id="search" class="form-control mx-sm-3" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên món cần tìm">
+                                    <input type="submit" class="btnSearch" value="Tìm">
+
+                                </div>
+                            }
+                            <div class="amado_product_area">
+                                <div class="container-fluid">
+                                  
+                                    @RenderBody()
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <!-- Pagination -->
+                                            <nav aria-label="navigation">
+                                                <ul class="pagination justify-content-end mt-50">
+                                                    <li class="page-item active"><a class="page-link" href="#">01.</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">02.</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">03.</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">04.</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer_area clearfix">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-4">
+                    <div class="single_widget_area">
+                        <!-- Logo -->
+                        <div class="footer-logo mr-50">
+                            <a asp-controller="Home" asp-action="Index">LuvHos</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Widget Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="single_widget_area">
+                        <!-- Footer Menu -->
+                        <div class="footer_menu">
+                            <nav class="navbar navbar-expand-lg justify-content-end">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                                <div class="collapse navbar-collapse" id="footerNavContent">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" asp-action="Index" asp-controller="Home">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-action="Index" asp-controller="SanPham">Shop</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Tin Tức</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Liên Hệ</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="Admin">Go To Admin</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/asset_client/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="~/asset_client/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/asset_client/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="~/asset_client/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="~/asset_client/js/active.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @await RenderSectionAsync("Scripts",required:false)
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#sortOrder").change(function () {
+                var selectedValue = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("SortByPrice", "SanPham")',
+                    type: 'GET',
+                    data: { sortOrder: selectedValue },
+                    success: function (result) {
+                        $("#productTable").html(result);
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#search").on('input', function () {
+                var search = $("#search").val();
+                $.ajax({
+                    url: "/Product/Search",
+                    data: { Name: search },
+                    success: function (data) {
+                        // Xử lý kết quả tìm kiếm và hiển thị trên trang
+                        $("#result").html(data);
+                    }
+
+                })
+            })
+        })
+    </script>
+</body>
+</html>

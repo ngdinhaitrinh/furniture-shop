@@ -1,0 +1,208 @@
+﻿@model WebBanNoiThat.Models.SanPham
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebBanNoiThat.Models.BanNoiThatContext db = new WebBanNoiThat.Models.BanNoiThatContext();
+
+}
+<style>
+   
+    .button1 {
+        background-color: #EA4C89;
+
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 30px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button1:hover,
+    .button1:focus {
+        background-color: #F082AC;
+         
+    }
+    .add-to-cart
+
+    {
+        margin-top: 20px;
+        background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+        border: 0;
+        border-radius: 12px;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 2.5;
+        outline: transparent;
+        padding: 0 1rem;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow .2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+    }
+
+    .quantity_input{
+        height:30px;
+        width: 100px;
+    }
+
+    .ratings {
+        color: yellow;
+       
+    }
+    .toast{
+
+        margin-left: 250px;
+        bottom: 800px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: !important #212529;
+        width: 100%;
+        max-width: 300px;
+        border: 1px solid rgba(0,0,0,.1);
+        box-shadow: 0 0.5rem 1rem;
+        border-radius: 0.25rem;
+        background-color: #66CC33;
+        color: white;
+        font-size: 16px;
+    }
+</style>
+<!-- Product Details Area Start -->
+<div class="single-product-area section-padding-20 clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-50">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Cửa hàng</a></li>
+                        <li class="breadcrumb-item"><a href="#">Chi Tiết Sản Phẩm</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.TenSp</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(@Model.AnhSp);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(@Model.AnhSp);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(@Model.AnhSp);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(@Model.AnhSp);">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img" href="@Model.AnhSp">
+                                    <img class="d-block w-100" src="@Model.AnhSp" alt="First slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@Model.AnhSp">
+                                    <img class="d-block w-100" src="@Model.AnhSp" alt="Second slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@Model.AnhSp">
+                                    <img class="d-block w-100" src="@Model.AnhSp" alt="Third slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="@Model.AnhSp">
+                                    <img class="d-block w-100" src="@Model.AnhSp" alt="Fourth slide">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div id="toast" class="toast">
+                   
+                    <div class="toast-body">
+                        Thêm sản phẩm thành công
+                    </div>
+                </div>
+
+                <div class="single_product_desc">
+                    <!-- Product Meta Data -->
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+
+                        <a href="product-details.html">
+                            <h6>@Model.TenSp</h6>
+                        </a>
+                        <p class="product-price" style="font-weight:600">@Model.GiaSp.ToString("#,00") VNĐ</p>
+                        <!-- Ratings & Review -->
+                        <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                        <!-- Avaiable -->
+                        <p class="avaibility"><i class="fa fa-circle"></i> Còn hàng</p>
+                    </div>
+
+                    <div class="short_overview my-5">
+               
+                        Mô tả <p>@Model.MotaSp</p>
+                    </div>
+
+                
+                    <div class="product_quantity">
+                        <span>Số lượng:</span>
+                        <div class="quantity_buttons">
+                            <button class="decrease_button button1">-</button>
+                            <input class="quantity_input" type="text" value="1" readonly>
+                            <button class="increase_button button1">+</button>
+                        </div>
+                    </div>
+                    <a id="addToCartButton" class="btn add-to-cart" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-Id="@Model.MaSp" data-product-id="@Model.MaSp"><i class="fa fa-shopping"></i>Thêm vào giỏ</a>
+
+
+                    <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Product Details Area End -->
+
